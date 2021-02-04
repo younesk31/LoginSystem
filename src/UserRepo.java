@@ -12,12 +12,33 @@ public class UserRepo {
         addUsersFromFile();
     }
 
+
     public boolean checkPassword(String username, String password) {
         User user = userMap.get(username);
         if (user != null) {
             return user.getPassword().equals(password);
         } else {
             return false;
+        }
+    }
+
+    public void doTheWork() {
+        boolean oneMore = true;
+        Scanner input = new Scanner(System.in);
+        while (oneMore) {
+            System.out.println("Username: ");
+            String user = input.nextLine();
+            System.out.println("Password: ");
+            String pass = input.nextLine();
+            if (checkPassword(user, pass)) {
+                System.out.println("Login Success! Welcome: " + user + "\nLogging you out now!");
+            } else {
+                System.out.println("Wrong! Try again!");
+            }
+
+            if (user.equals("exit")) {
+                oneMore = false;
+            }
         }
     }
 
