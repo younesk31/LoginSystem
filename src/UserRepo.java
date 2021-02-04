@@ -28,7 +28,9 @@ public class UserRepo {
             String pass = scan.nextLine();
             userMap.put(user, new User(user, pass));
         }
+        if (!scan.hasNextLine()) {
+            System.out.println("No users found in file!");
+        }
     }
-
 
 }
