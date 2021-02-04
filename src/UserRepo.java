@@ -12,7 +12,6 @@ public class UserRepo {
         addUsersFromFile();
     }
 
-
     public boolean checkPassword(String username, String password) {
         User user = userMap.get(username);
         if (user != null) {
@@ -23,35 +22,33 @@ public class UserRepo {
     }
 
     public void doTheWork() {
-        boolean oneMore = true;
         Scanner input = new Scanner(System.in);
-        while (oneMore) {
-            System.out.println("Username: ");
+        while (true) {
+            System.out.println("Welcome to the Login System! Press q to exit");
+            System.out.println("Please input your Username: ");
             String user = input.nextLine();
-            System.out.println("Password: ");
+            System.out.println("Please input your Password: ");
             String pass = input.nextLine();
             if (checkPassword(user, pass)) {
-                System.out.println("Login Success! Welcome: " + user + "\nLogging you out now!");
+                System.out.println("Login Success! Found: " + user + "\n");
             } else {
-                System.out.println("Wrong! Try again!");
+                System.out.println("Login Failed! Try again\n");
             }
-
-            if (user.equals("exit")) {
-                oneMore = false;
+            if (user.equals("q") || user.equals("Q") || pass.equals("q") || pass.equals("Q")) {
+                System.exit(0);
             }
         }
     }
 
     private void addUsersFromFile() throws FileNotFoundException {
         Scanner scan = new Scanner(new File("users.txt"));
+        if (!scan.hasNextLine()) {
+            System.out.println("No users found in file!");
+        }
         while (scan.hasNextLine()) {
             String user = scan.nextLine();
             String pass = scan.nextLine();
             userMap.put(user, new User(user, pass));
         }
-        if (!scan.hasNextLine()) {
-            System.out.println("No users found in file!");
-        }
     }
-
 }
