@@ -1,13 +1,14 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         UserRepo users = new UserRepo();
         Scanner input = new Scanner(System.in);
 
         boolean oneMore = true;
 
-        while (oneMore){
+        while (oneMore) {
             System.out.println("Username: ");
             String user = input.nextLine();
             System.out.println("Password: ");
